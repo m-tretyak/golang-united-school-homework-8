@@ -3,6 +3,7 @@ package hw80Impl
 import (
 	"flag"
 	"fmt"
+	"os"
 )
 
 const (
@@ -76,7 +77,7 @@ func parseFlagSet(flagSet *flag.FlagSet, args []string) Arguments {
 		result[f.Name] = f.Value.String()
 	})
 
-	return Arguments{}
+	return result
 }
 
 func (arr strArr) contains(item string) bool {
@@ -109,5 +110,5 @@ func (r *Arguments) Validate() error {
 }
 
 func NewArgumentsFromCommandLine() Arguments {
-	return parseFlagSet(flag.CommandLine, flag.CommandLine.Args())
+	return parseFlagSet(flag.CommandLine, os.Args[1:])
 }
